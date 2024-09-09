@@ -216,3 +216,6 @@ V1_DATABASE = env.db(
     "V1_DATABASE",
     default="postgresql://username:password@example.com:5432/opencve_v1",
 )
+
+#Import the config of AdvancedCVE.
+from advancedcve import settings
