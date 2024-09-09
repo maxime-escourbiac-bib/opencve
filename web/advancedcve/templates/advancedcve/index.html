@@ -16,4 +16,18 @@
         <div class="row">
         </div>
     </div>
-</main>{% endblock %}
+</main>
+{% endblock %}
+
+{% block extra_foot %}
+<script type="text/javascript">
+
+    function hello(data) {
+        bootbox.alert(data['message']);
+    }
+
+    document.body.onload = function() {
+        ajaxGetHello(hello,hello);
+    };
+</script>
+{% endblock %}

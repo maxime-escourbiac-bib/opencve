@@ -10,6 +10,21 @@ $.ajaxSetup({
 });
 
 /**
+ * Hello world ajax call.
+ * 
+ * @param {*} successFunction Function to call in case of ajax success.
+ * @param {*} errorFunction Function to call in case of ajax failure.
+ */
+function ajaxGetHello(successFunction, errorFunction) {
+    $.ajax({
+        url: "/advanced/api/hello/",
+        type: 'GET',
+        success: successFunction,
+        error: errorFunction
+    })
+}
+
+/**
  * Convert array to JSON string.
  * 
  * @param {*} array Array to convert.
