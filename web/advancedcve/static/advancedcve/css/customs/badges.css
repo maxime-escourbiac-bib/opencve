@@ -1,0 +1,193 @@
+/*!
+ * Hit severity stylesheet.
+ */
+
+.bc-badge--p1 {
+    border-color: #d13535;
+    background-color: #f8dfdf;
+}
+
+.bc-badge--p2 {
+    border-color: #ff6900;
+    background-color: #ffe7d6;
+}
+
+.bc-badge--p3 {
+    border-color: #f0ad4e;
+    background-color: #fdf2e3;
+}
+
+.bc-badge--p4 {
+    border-color: #5eae00;
+    background-color: #e5f2d6;
+}
+
+.bc-badge--p5 {
+    border-color: #0278b8;
+    background-color: #d7e9f4;
+}
+
+.bc-badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    color: #000;
+}
+
+.bc-badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.cvss3-badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.cvss3-badge-dark {
+    color: #fff;
+    background-color: #343a40;
+}
+
+.cvss3-badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.cvss3-badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+}
+
+.cvss3-badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.cvss3-badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.cvss4-badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.cvss4-badge-dark {
+    color: #fff;
+    background-color: #343a40;
+}
+
+.cvss4-badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.cvss4-badge-warning {
+    color: #212529;
+    background-color: #ffc107;
+}
+
+.cvss4-badge-success {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.cvss4-badge-secondary {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.fix-complexity-0 {
+    color: #fff;
+    background-color: #6c757d;
+}
+
+.fix-complexity-1 {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.fix-complexity-2 {
+    color: #212529;
+    background-color: #ffc107;
+}
+
+.fix-complexity-3 {
+    color: #fff;
+    background-color: #28a745;
+}
+
+.fix-complexity-badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.retesthit-status-badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.retesthit-status-badge-NT {
+    color: #fff;
+    background-color: rgb(54, 162, 235);
+}
+
+.retesthit-status-badge-NA {
+    color: #fff;
+    background-color: rgb(224, 224, 224);
+}
+
+.retesthit-status-badge-NF {
+    color: #fff;
+    background-color: rgb(255, 51, 51);
+}
+
+.retesthit-status-badge-PF {
+    color: #fff;
+    background-color: rgb(255, 178, 102);
+}
+
+.retesthit-status-badge-F {
+    color: #fff;
+    background-color: rgb(51, 255, 51);
+}

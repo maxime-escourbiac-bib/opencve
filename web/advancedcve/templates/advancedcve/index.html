@@ -1,11 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hello World</title>
-</head>
-<body>
-  <h1>Hello, World!</h1>
-</body>
-</html>
+{% extends "advancedcve/base.html" %}
+
+{% block title %} Dashboard | AdvancedCVE{% endblock %}
+
+{% block page %}
+<main role="main" class="container">
+
+    <!-- Main message -->
+    <div class="pricing-header px-3 py-3 pt-md-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4">AdvancedCVE</h1>
+        <p class="lead">Vulnerability Management Toolbox for OpenCVE</p>
+    </div>
+    <!-- End of Main message -->
+
+    <div class="container">
+        <div class="row">
+        </div>
+    </div>
+</main>{% endblock %}
