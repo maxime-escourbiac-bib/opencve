@@ -245,3 +245,6 @@ V1_DATABASE = env.db(
 
 # Redirect user to onboarding view if they do not belong to an organization
 ENABLE_ONBOARDING = True
+
+#Import the config of AdvancedCVE.
+from advancedcve import settings

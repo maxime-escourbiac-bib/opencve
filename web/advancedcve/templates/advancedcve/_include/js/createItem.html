@@ -1,0 +1,13 @@
+{% load split %}
+<script type="text/javascript">
+
+    function itemCreationSuccess(data) {
+        {% for param in params_to_clean|split %}$("#{{param}}").val("");{% endfor %}
+        success($("#messages"), "{{item}} was created!");
+    }
+
+    $('#createBtn').on('click', function () {
+        cleanMessagesContainer($("#messages"));
+        {{ajax_function}}(itemCreationSuccess, commonFailure {% for param in params|split %},$("#{{param}}").val(){% endfor %});
+    });
+</script>
