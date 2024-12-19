@@ -246,5 +246,9 @@ V1_DATABASE = env.db(
 # Redirect user to onboarding view if they do not belong to an organization
 ENABLE_ONBOARDING = True
 
-#Import the config of AdvancedCVE.
+#Specific part for AdvancedCVE.
+
+# The local folder where the repository `certist` is cloned
+CERTIST_REPO_PATH = env.str("CERTIST_REPO_PATH", default="/path/to/certist")
+
 from advancedcve import settings
