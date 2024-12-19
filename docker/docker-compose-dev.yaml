@@ -6,11 +6,11 @@ x-airflow-common: &airflow-common
     context: ../scheduler
     dockerfile: Dockerfile
   env_file:
-    - .env
+    - dev/airflow/.env
   volumes:
     - ../scheduler/dags/:/opt/airflow/dags
     - ../scheduler/airflow.cfg:/opt/airflow/airflow.cfg:ro
-    - repositories:/home/airflow/repositories/
+    - ./dev/repositories:/home/airflow/repositories/
   depends_on:
     &airflow-common-depends-on
     redis:
@@ -89,31 +89,14 @@ services:
 
   webserver:
     container_name: webserver
-    env_file:
-      - .env
     build:
       context: ../web/
-      args:
-        - OPENCVE_REPOSITORY=${OPENCVE_REPOSITORY}
-        - OPENCVE_VERSION=${OPENCVE_VERSION}
-        - GUNICORN_CMD_ARGS=${GUNICORN_CMD_ARGS}
-      dockerfile: Dockerfile
-    volumes:
-      - ../web/opencve/conf/.env:/app/opencve/web/opencve/conf/.env:ro
-      - ../web/opencve/conf/settings.py:/app/opencve/web/opencve/conf/settings.py:ro
-      - repositories:/app/repositories/:ro
-      - staticfiles:/app/static/
-    restart: on-failure
-
-  nginx:
-    container_name: nginx
-    image: nginx:bookworm
+      dockerfile: ../docker/dev/webserver/Dockerfile
     ports:
-       - "${OPENCVE_PORT:-80}:80"
+      - "8000:8000"
     volumes:
-      - ./conf/opencve.conf.template:/etc/nginx/templates/opencve.conf.template:ro
-      - ./conf/default.conf.template:/etc/nginx/templates/default.conf.template:ro
-      - staticfiles:/var/www/opencve/static/:ro
+      - ../web/:/app/opencve
+      - ./dev/repositories:/app/repositories/:ro
     restart: on-failure
 
   redis:
@@ -135,6 +118,8 @@ services:
       POSTGRES_DB: opencve
       PGDATA: /var/lib/postgreqsql/data
     restart: on-failure
+    ports:
+      - "5432:5432"
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "$POSTGRES_USER"]
       interval: 10s
@@ -146,5 +131,3 @@ services:
 
 volumes:
     postgres-db:
-    staticfiles:
-    repositories:

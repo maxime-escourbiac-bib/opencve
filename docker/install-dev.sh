@@ -54,7 +54,7 @@ start-docker-stack() {
     export $(grep -v '^#' .env | grep -E '^POSTGRES' | tr '\n' ' ')
 
     echo "--> Starting Docker compose stack"
-    docker compose -f docker-compose-dev.yml up -d 
+    docker compose -f docker-compose-dev.yaml up -d 
 
     echo "--> Adding Airflow connections"
     docker exec -it airflow-scheduler airflow connections add opencve_postgres --conn-uri postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/opencve
