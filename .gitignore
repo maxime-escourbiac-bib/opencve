@@ -20,6 +20,7 @@ celerybeat-schedule.db
 # Editors
 .vscode/
 .idea/
+.DS_Store
 
 # Tests and coverage
 .coverage
@@ -35,4 +36,6 @@ scheduler/airflow-webserver.pid
 web/.pytest_cache/
 web/emails/
 docker/conf/opencve.conf.template
-docker/conf/default.conf.template
+
+# Dev environment
+docker/dev/repositories
