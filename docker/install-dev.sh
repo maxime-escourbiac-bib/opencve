@@ -5,23 +5,16 @@
 
 set -e
 
+create-dev-folders() {
+
+    echo "--> Prepare DEV environment"
+    mkdir -p ./dev/repositories
+    cp ./dev/webserver/.env.dev ../web/opencve/conf/.env
+    cp ./dev/webserver/settings.py ../web/opencve/conf/settings.py
+
+}
+
 add-config-files() {
-
-    _RELEASE=$1
-    _MAJOR_VERSION=${_RELEASE:0:2}
-
-    echo "--> Checking release to install"
-    if [[ $_RELEASE == "latest" ]] ; then
-        _RELEASE=`git describe --tags --abbrev=0`
-        echo "--> Checkout latest release: $_RELEASE"
-        git checkout $_RELEASE
-    elif [[ $_MAJOR_VERSION =~ ^[v0-1|0-1.]+$ ]] ; then
-        echo "ERROR: this script works only for release >= 2.0.0, release given: $_RELEASE"
-        exit 1
-    else
-        echo "--> Checkout release: $_RELEASE"
-        git checkout $_RELEASE
-    fi
 
     echo "--> Adding Airflow configuration file"
     cp ../scheduler/airflow.cfg.example ../scheduler/airflow.cfg
@@ -61,7 +54,7 @@ start-docker-stack() {
     export $(grep -v '^#' .env | grep -E '^POSTGRES' | tr '\n' ' ')
 
     echo "--> Starting Docker compose stack"
-    docker compose up -d
+    docker compose -f docker-compose-dev.yml up -d 
 
     echo "--> Adding Airflow connections"
     docker exec -it airflow-scheduler airflow connections add opencve_postgres --conn-uri postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres:5432/opencve
@@ -84,6 +77,10 @@ start-docker-stack() {
     echo "--> Django webserver DB migrate"
     docker exec -it webserver python manage.py migrate
 
+    echo "--> Quick fixes for Dev environment"
+    docker exec -it airflow-worker git config --global --add safe.directory '*'
+    docker exec -it airflow-scheduler git config --global --add safe.directory '*'
+    
 }
 
 clone-repositories() {
