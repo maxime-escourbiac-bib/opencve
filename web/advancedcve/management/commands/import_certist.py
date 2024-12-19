@@ -24,7 +24,7 @@ class Command(BaseCommand):
         root = tree.getroot()
 
         assets_catalog = root.findall(".//Asset_Catalog")
-        print(f"Found {len(assets_catalog)} products in the CERT-IST repository")
+        print(f"Found {self.blue(len(assets_catalog))} products in the CERT-IST repository")
 
         for asset_catalog in assets_catalog:
             product = CertIstProduct()
