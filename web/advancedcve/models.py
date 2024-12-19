@@ -1,10 +1,12 @@
-from django.db import models
-
+from cves.models import Cve
+from django.conf import settings
 from django.contrib.postgres.indexes import GinIndex, OpClass
 from django.db import models
 from django.db.models.functions import Upper
 
-from cves.models import Cve
+import datetime
+import pathlib
+import xml.etree.ElementTree as ET
 
 
 """CERT-IST product catalog model."""
@@ -41,9 +43,35 @@ class CertIstProduct(models.Model):
             ),
         ]
         
-
     def __str__(self):
         return f"{self.vendor}-{self.product}-{self.version}"
+    
+    """ Get all products from CERTIST repo."""
+    def get_all_products_xml_node(products_path=pathlib.Path(settings.CERTIST_REPO_PATH) / "products/products.xml"):
+        tree = ET.parse(products_path)
+        root = tree.getroot()
+        return root.findall(".//Asset_Catalog")
+
+    """ Read product from xml node."""
+    def from_xml_node(xml_node):
+        product = CertIstProduct()
+        product.certist_id = xml_node.get('id')
+        product.vendor = xml_node.find('Vendor').text
+        product.product = xml_node.find('Product').text
+        product.product_category = xml_node.find('Product').get("category")
+        product.version = xml_node.find('Version').text
+        product.created = datetime.datetime.strptime(xml_node.find('Creation_Date').text, '%Y-%m-%d').date()
+        if(xml_node.find('Obsoleted') is not None):
+            product.obsoleted = datetime.datetime.strptime(xml_node.find('Obsoleted').text, '%Y-%m-%d').date()
+        product.monitoring_level = xml_node.find('Monitoring_Level').text
+
+        cpes = []
+        for cpe in xml_node.find('Cpe_List').findall(".//Cpe"):
+            cpes.append(cpe.text)
+        product.cpes = cpes 
+        return product
+    
+
     
 class CertIstCommon(models.Model):
     id = models.AutoField(primary_key=True)

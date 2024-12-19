@@ -19,29 +19,11 @@ class Command(BaseCommand):
 
     """ Insert CERT-IST products into the database. """
     def insert_products(self):
-        products_path = pathlib.Path(self.CERTIST_PATH) / "products/products.xml"
-        tree = ET.parse(products_path)
-        root = tree.getroot()
-
-        assets_catalog = root.findall(".//Asset_Catalog")
+        assets_catalog = CertIstProduct.get_all_products_xml_node()
         print(f"Found {self.blue(len(assets_catalog))} products in the CERT-IST repository")
 
         for asset_catalog in assets_catalog:
-            product = CertIstProduct()
-            product.certist_id = asset_catalog.get('id')
-            product.vendor = asset_catalog.find('Vendor').text
-            product.product = asset_catalog.find('Product').text
-            product.product_category = asset_catalog.find('Product').get("category")
-            product.version = asset_catalog.find('Version').text
-            product.created = datetime.datetime.strptime(asset_catalog.find('Creation_Date').text, '%Y-%m-%d').date()
-            if(asset_catalog.find('Obsoleted') is not None):
-                product.obsoleted = datetime.datetime.strptime(asset_catalog.find('Obsoleted').text, '%Y-%m-%d').date()
-            product.monitoring_level = asset_catalog.find('Monitoring_Level').text
-
-            cpes = []
-            for cpe in asset_catalog.find('Cpe_List').findall(".//Cpe"):
-                cpes.append(cpe.text)
-            product.cpes = cpes 
+            product = CertIstProduct.from_xml_node(asset_catalog)
             product.save()
 
     """ Retrieve the root information from the xml node. """
@@ -313,8 +295,8 @@ class Command(BaseCommand):
         self.info(f"Parsing the CERT-IST products repository ({self.blue(self.CERTIST_PATH)})")
         self.insert_products()
 
-        self.info(f"Parsing the CERT-IST alerts ({self.blue(self.CERTIST_PATH)})")
-        self.insert_alerts()
+        #self.info(f"Parsing the CERT-IST alerts ({self.blue(self.CERTIST_PATH)})")
+        #self.insert_alerts()
 
-        self.info(f"Parsing the CERT-IST advisories ({self.blue(self.CERTIST_PATH)})")
-        self.insert_advisories()
+        #self.info(f"Parsing the CERT-IST advisories ({self.blue(self.CERTIST_PATH)})")
+        #self.insert_advisories()
