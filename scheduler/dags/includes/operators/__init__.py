@@ -8,6 +8,7 @@ from includes.constants import (
     NVD_LOCAL_REPO,
     REDHAT_LOCAL_REPO,
     VULNRICHMENT_LOCAL_REPO,
+    CERTIST_LOCAL_REPO
 )
 
 
@@ -18,6 +19,7 @@ class KindOperator(BaseOperator):
         "nvd": NVD_LOCAL_REPO,
         "redhat": REDHAT_LOCAL_REPO,
         "vulnrichment": VULNRICHMENT_LOCAL_REPO,
+        "certist": CERTIST_LOCAL_REPO,
     }
 
     def __init__(self, kind: str, **kwargs) -> None:

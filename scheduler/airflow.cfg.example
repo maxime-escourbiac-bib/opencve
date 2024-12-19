@@ -1265,6 +1265,9 @@ redhat_repo_path = /home/airflow/repositories/opencve-redhat
 # The local folder where the repository `vulnrichment` is cloned
 vulnrichment_repo_path = /home/airflow/repositories/vulnrichment
 
+# The local folder where the repository `certist` is cloned 
+certist_repo_path = /home/airflow/repositories/certist
+
 # The starting date of the main OpenCVE workflow, used to update
 # the vulnerabilities data and send notifications to the users.
 # It has to be set once and only once during OpenCVE initialization.
