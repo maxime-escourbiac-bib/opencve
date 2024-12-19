@@ -144,9 +144,9 @@ def get_dates_from_context(context: Dict) -> Tuple[DateTime, DateTime]:
     return start, end
 
 
-def list_commits(logger: Logger, start: DateTime, end: DateTime) -> List[Commit]:
-    logger.info("Reading %s repository", KB_LOCAL_REPO)
-    repo_path = pathlib.Path(KB_LOCAL_REPO)
+def list_commits(logger: Logger, start: DateTime, end: DateTime, repo_path: str = KB_LOCAL_REPO) -> List[Commit]:
+    logger.info("Reading %s repository", repo_path)
+    repo_path = pathlib.Path(repo_path)
 
     if not all([start, end]):
         raise AirflowException("Start and end intervals must be set")
