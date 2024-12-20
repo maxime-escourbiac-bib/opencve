@@ -3,8 +3,8 @@
 name: opencve
 x-airflow-common: &airflow-common
   build:
-    context: ../scheduler
-    dockerfile: Dockerfile
+    context: ../
+    dockerfile: scheduler/Dockerfile
   env_file:
     - dev/airflow/.env
   volumes:

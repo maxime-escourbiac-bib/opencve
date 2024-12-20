@@ -1,9 +1,13 @@
 from airflow.models.baseoperator import BaseOperator
 from git.objects.commit import Commit
 from includes.constants import CERTIST_LOCAL_REPO
-
 from includes.utils import list_commits
 
+#This is needed to avoid the error: django.core.exceptions.AppRegistryNotReady: Apps aren't loaded yet.
+import django
+django.setup()
+
+from advancedcve.models import CertIstProduct
 
 class ProcessCertISTProductsOperator(BaseOperator):
     def __init__(self, **kwargs) -> None:
@@ -17,15 +21,8 @@ class ProcessCertISTProductsOperator(BaseOperator):
             repo_path=CERTIST_LOCAL_REPO
         )
 
-        # Process products.
-        self.log.info("Processing products commits")
-        product_update = False
-        for commit in commits:
-            self.log.info(commit)
-            
-        
-        if product_update:
-            self.log.info("Products have been updated, processing...")
+        for product in CertIstProduct.objects.all() :
+            self.log.info(product)
 
 
 class ProcessCertISTAdvisoriesOperator(BaseOperator):
