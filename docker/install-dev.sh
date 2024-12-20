@@ -76,10 +76,6 @@ start-docker-stack() {
 
     echo "--> Django webserver DB migrate"
     docker exec -it webserver python manage.py migrate
-
-    echo "--> Quick fixes for Dev environment"
-    docker exec -it airflow-worker git config --global --add safe.directory '*'
-    docker exec -it airflow-scheduler git config --global --add safe.directory '*'
     
 }
 
