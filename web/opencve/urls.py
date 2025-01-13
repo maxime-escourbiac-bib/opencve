@@ -73,3 +73,7 @@ urlpatterns = [
     #AdvancedCve
     path("advanced/", include("advancedcve.urls")),
 ]
+
+# Custom errors
+handler404 = "cves.views.handle_page_not_found"
+handler500 = "cves.views.handle_server_error"
